@@ -1,0 +1,24 @@
+<p>
+  <b>Date:</b>
+  <%= @transfer.date %>
+</p>
+
+<p>
+  <b>Quota:</b>
+  <%= @transfer.quota %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @transfer.title %>
+</p>
+
+
+<%= link_to 'Edit', edit_transfer_path(@transfer) %> |
+<%= link_to 'Back', transfers_path %>
+
+<div style="margin: 20px 0 0 0;">
+
+<%= @elixir %>
+
+</div>

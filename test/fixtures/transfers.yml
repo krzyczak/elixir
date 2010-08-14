@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  date: 2010-08-13
+  quota: 9.99
+  title: MyString
+
+two:
+  date: 2010-08-13
+  quota: 9.99
+  title: MyString

@@ -1,0 +1,24 @@
+<h1>Listing multi_transfers</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @multi_transfers.each do |multi_transfer| %>
+  <tr>
+    <td><%= multi_transfer.date %></td>
+    <td><%= link_to 'Show', multi_transfer %></td>
+    <td><%= link_to 'Edit', edit_multi_transfer_path(multi_transfer) %></td>
+    <td><%= link_to 'Destroy', multi_transfer, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Multi transfer', new_multi_transfer_path %> |
+<%= link_to 'New Multi transfer', choose_people_multi_transfers_path %>

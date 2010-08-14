@@ -1,0 +1,27 @@
+<h1>Listing transfers</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Quota</th>
+    <th>Title</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transfers.each do |transfer| %>
+  <tr>
+    <td><%= transfer.date %></td>
+    <td><%= transfer.quota %></td>
+    <td><%= transfer.title %></td>
+    <td><%= link_to 'Show', transfer %></td>
+    <td><%= link_to 'Edit', edit_transfer_path(transfer) %></td>
+    <td><%= link_to 'Destroy', transfer, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Transfer', new_transfer_path %>

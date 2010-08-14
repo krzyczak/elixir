@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  multi_transfer_id: 1
+  person_id: 1
+  quota: 9.99
+  title: MyString
+
+two:
+  multi_transfer_id: 1
+  person_id: 1
+  quota: 9.99
+  title: MyString

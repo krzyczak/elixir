@@ -1,0 +1,45 @@
+<% title('Szczegółowe dane osoby') %>
+
+<p>
+  <b>First name:</b>
+  <%= @person.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @person.last_name %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%= nice_account_number(@person.account) %>
+</p>
+
+<p>
+  <b>Bank Number:</b>
+  <%= nice_account_number(@person.bank_number) %>
+</p>
+
+<p>
+  <b>Street:</b>
+  <%= @person.street %>
+</p>
+
+<p>
+  <b>Street no:</b>
+  <%= @person.street_no %>
+</p>
+
+<p>
+  <b>Postal code:</b>
+  <%= @person.postal_code %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @person.city %>
+</p>
+
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>

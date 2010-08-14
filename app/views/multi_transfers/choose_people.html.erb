@@ -1,0 +1,34 @@
+<% title('Lista osób') %>
+
+choose_people_multi_transfers
+ new_multiple_multi_transfers
+
+<% form_tag new_multiple_multi_transfers_path do %>
+<table>
+  <tr>
+    <th class="last"></th>
+    <th>ID</th>
+    <th>Nazwisko i Imię</th>
+    <th>Adres</th>
+    <th>Nr Konta</th>
+    <th class="last"></th>
+    <th class="last"></th>
+    <th class="last"></th>
+  </tr>
+
+<% @people.each do |person| %>
+  <tr>
+    <td><%= check_box_tag "people_ids[]", person.id %></td>
+    <td><%= person.id %></td>
+    <td><%= person.last_name %> <%= person.first_name %></td>
+    <td style="font-size: 8pt;"><%= person.street %> <%= person.street_no %><br/><%= person.postal_code %> <%= person.city %></td>
+    <td><%= nice_account_number(person.account) %></td>
+    <td><%= link_to 'Show', person %></td>
+    <td><%= link_to 'Edit', edit_person_path(person) %></td>
+    <td><%= link_to 'X', person, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= submit_tag "Create New MultiTransfer for checked..." %>
+<% end %>

@@ -1,0 +1,16 @@
+defaults: &defaults
+  adapter: mysql
+  username: root
+  password: os1ol3k
+
+development:
+  database: development
+  <<: *defaults
+
+test:
+  database: test 
+  <<: *defaults
+
+production:
+  database: production
+  <<: *defaults

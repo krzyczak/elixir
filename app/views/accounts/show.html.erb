@@ -1,0 +1,23 @@
+<p>
+  <b>User:</b>
+  <%= @account.user_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @account.name %>
+</p>
+
+<p>
+  <b>Bank number:</b>
+  <%= @account.bank_number %>
+</p>
+
+<p>
+  <b>Account number:</b>
+  <%= @account.account_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>

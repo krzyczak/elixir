@@ -1,0 +1,33 @@
+<p>
+  <b>Username:</b>
+  <%= @user.username %>
+</p>
+
+<p>
+  <b>Company name:</b>
+  <%= @user.company_name %>
+</p>
+
+<p>
+  <b>Street:</b>
+  <%= @user.street %>
+</p>
+
+<p>
+  <b>Street no:</b>
+  <%= @user.street_no %>
+</p>
+
+<p>
+  <b>Postal code:</b>
+  <%= @user.postal_code %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @user.city %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
