@@ -4,23 +4,13 @@ class MultiTransfersController < ApplicationController
   end
 
   def show
-    @multi_transfer = MultiTransfer.find(params[:id])
-        
-    account = current_user.accounts.first
-    
-    @elixir = @multi_transfer.elixir(account.bank_number, account.account_number, current_user.company_name, current_user.street, current_user.street_no, current_user.postal_code, current_user.city)
-    
-    elixir_to_file(@elixir, '/media/Multimedia/pli/result.pli', 'IBM852')
-    
-    respond_to do |format|
-      format.html #normal view
-      format.text { send_file '/media/Multimedia/pli/result.pli', :type=>"application/pli", :x_sendfile => true }
-    end
+    multi_transfer_data
   end
 
-  def new
-    @multi_transfer = MultiTransfer.new
-  end
+  #def new
+  #  #@multi_transfer = MultiTransfer.new
+  #  new_multiple
+  #end
   
   def edit
     @multi_transfer = MultiTransfer.find(params[:id])
@@ -28,10 +18,6 @@ class MultiTransfersController < ApplicationController
 
   def create
     @multi_transfer = MultiTransfer.new(params[:multi_transfer])
-    
-    #params.each do |param|
-    #  puts "####### PARAM: #{param} ######"
-    #end
 
     if @multi_transfer.save
       redirect_to(@multi_transfer, :notice => 'Multi transfer was successfully created.')
@@ -42,30 +28,24 @@ class MultiTransfersController < ApplicationController
 
   # PUT /multi_transfers/1
   # PUT /multi_transfers/1.xml
-  def update
-    @multi_transfer = MultiTransfer.find(params[:id])
+  #def update
+  #  @multi_transfer = MultiTransfer.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    if @multi_transfer.update_attributes(params[:multi_transfer])
+  #      format.html { redirect_to(@multi_transfer, :notice => 'Multi transfer was successfully updated.') }
+  #      format.xml  { head :ok }
+  #    else
+  #      format.html { render :action => "edit" }
+  #      format.xml  { render :xml => @multi_transfer.errors, :status => :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
-    respond_to do |format|
-      if @multi_transfer.update_attributes(params[:multi_transfer])
-        format.html { redirect_to(@multi_transfer, :notice => 'Multi transfer was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @multi_transfer.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /multi_transfers/1
-  # DELETE /multi_transfers/1.xml
   def destroy
     @multi_transfer = MultiTransfer.find(params[:id])
     @multi_transfer.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(multi_transfers_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(multi_transfers_url)
   end
   
   def choose_people
@@ -76,11 +56,22 @@ class MultiTransfersController < ApplicationController
     @multi_transfer = MultiTransfer.new
     people_ids = params[:people_ids]
     people_ids.each do |pid|
-      #@multi_transfer.multi_transfer_parts.build.person = Person.find(pid)
       @multi_transfer.multi_transfer_parts.build.person_id = pid
       @multi_transfer.multi_transfer_parts.last.person = Person.find(pid)
-      #puts "####### PERSON ID: #{pid} ######"
-      #puts "####### PERSON ID MTP: #{@multi_transfer.multi_transfer_parts.last.person.id} ######"
     end
+  end
+  
+  def download
+    multi_transfer_data
+    elixir_to_file(@elixir, 'result.pli', 'IBM852')
+    send_file 'result.pli', :type => "application/pli", :x_sendfile => true
+    FileUtils.remove('result.pli')
+  end
+  
+  private
+  def multi_transfer_data
+    @multi_transfer = MultiTransfer.find(params[:id])
+    account = current_user.accounts.first
+    @elixir = @multi_transfer.elixir(account.bank_number, account.account_number, current_user.company_name, current_user.street, current_user.street_no, current_user.postal_code, current_user.city)
   end
 end

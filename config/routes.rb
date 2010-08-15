@@ -1,12 +1,10 @@
 Przelew::Application.routes.draw do
-  #match "/multi_transfers/choose_people(.:format)" => "multi_transfers#choose_people"#, :as => :choose_people
+  match "/multi_transfers/download/:id.pli" => "multi_transfers#download", :as => :download_multi_transfer
 
   resources :users
   resources :accounts
   resources :people
   resources :transfers
-  #resources :multi_transfers#, :collection => { :choose_people => :post, :new_multiple => :post }
-  #resources :multi_transfers, :collection => { :new_multiple => :post }
   
   resources :multi_transfers do
     collection do

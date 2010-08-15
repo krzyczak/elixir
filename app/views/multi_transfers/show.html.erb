@@ -5,6 +5,10 @@
   <%= @multi_transfer.date %>
 </p>
 
+<p>
+  <%= link_to 'Pobierz plik do importu', download_multi_transfer_path(@multi_transfer) %>
+</p>
+
 <hr/>
 <p>
   <% @elixir.split("\n").each do |e| %>
