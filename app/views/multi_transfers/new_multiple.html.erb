@@ -15,12 +15,51 @@
 
   <div class="field">
     <%= f.label :date %><br />
-    <%= f.date_select :date %>
+    <%= f.text_field :date %>
   </div>
   
   <div class="field">
-    Tytuły identyczne? <%= check_box_tag :titles_identical %>
+    Tytuły identyczne? <%= check_box_tag :titles_identical %><br/>
     Kwoty indentyczne? <%= check_box_tag :quotas_identical %>
+    <script>
+      function toggle_disabled(elem) {
+        if(elem.attr('readonly') == true) {
+          elem.removeAttr('readonly');
+        } else {
+          elem.attr('readonly', 'readonly');
+        }
+      }
+      
+      $(document).ready(function(){
+        
+        $('#multi_transfer_date').datepicker({
+          autoSize: true,
+          dateFormat: 'yy-mm-dd',
+          monthNames: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień']
+        });
+        
+        $('#titles_identical').click(function(){
+          $('.title_field').val($('#multi_transfer_multi_transfer_parts_attributes_0_title').val());
+          toggle_disabled($('.title_field'));
+        });
+        
+        $('#quotas_identical').click(function(){
+          $('.quota_field').val($('#multi_transfer_multi_transfer_parts_attributes_0_quota').val());
+          toggle_disabled($('.quota_field'));
+        });
+        
+        $(".quota_field").blur(function(){
+          var kwota = parseFloat($(this).val()).toString();
+          if(kwota == "NaN") {
+            $(this).val(parseFloat(1).toFixed(2) );
+            $(this).css('background', '#FFCCFF');
+          } else {
+            $(this).val(parseFloat(kwota).toFixed(2) );
+            $(this).css('background', '#CCFFCC');
+          }
+        });
+      });
+    </script>
   </div>
   
   
@@ -34,12 +73,12 @@
           <%= mtp.hidden_field :person_id %>
         </div>
         <div class="field">
-          <%= mtp.label :quota %><br />
-          <%= mtp.text_field :quota %>
+          <%= mtp.label :title %><br />
+          <%= mtp.text_field :title, :class => :title_field %>
         </div>
         <div class="field">
-          <%= mtp.label :title %><br />
-          <%= mtp.text_field :title %>
+          <%= mtp.label :quota %><br />
+          <%= mtp.text_field :quota, :class => :quota_field %>
         </div>
       </div>
       <hr/>

@@ -5,12 +5,17 @@ class MultiTransfersController < ApplicationController
 
   def show
     @multi_transfer = MultiTransfer.find(params[:id])
-    
+        
     account = current_user.accounts.first
     
     @elixir = @multi_transfer.elixir(account.bank_number, account.account_number, current_user.company_name, current_user.street, current_user.street_no, current_user.postal_code, current_user.city)
     
     elixir_to_file(@elixir, '/media/Multimedia/pli/result.pli', 'IBM852')
+    
+    respond_to do |format|
+      format.html #normal view
+      format.text { send_file '/media/Multimedia/pli/result.pli', :type=>"application/pli", :x_sendfile => true }
+    end
   end
 
   def new

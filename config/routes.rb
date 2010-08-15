@@ -15,6 +15,8 @@ Przelew::Application.routes.draw do
     end
   end
   
+  root :to => "people#index"
+  
   #resources :forums do  
   #  collection do  
   #    get :sortable  

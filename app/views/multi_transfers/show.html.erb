@@ -7,7 +7,9 @@
 
 <hr/>
 <p>
-  <%= @elixir %>
+  <% @elixir.split("\n").each do |e| %>
+    <%= e %><br/><br/><br/>
+  <% end %>
 </p>
 
 

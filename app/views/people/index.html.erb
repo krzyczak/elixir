@@ -6,16 +6,16 @@
     <th>Nazwisko i Imię</th>
     <th>Adres</th>
     <th>Nr Konta</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th class="last"></th>
+    <th class="last"></th>
+    <th class="last"></th>
   </tr>
 
 <% @people.each do |person| %>
   <tr>
     <td><%= person.id %></td>
     <td><%= person.last_name %> <%= person.first_name %></td>
-    <td><%= person.street %> <%= person.street_no %><br/><%= person.postal_code %> <%= person.city %></td>
+    <td style="font-size: 8pt;"><%= person.street %> <%= person.street_no %><br/><%= person.postal_code %> <%= person.city %></td>
     <td><%= nice_account_number(person.account) %></td>
     <td><%= link_to 'Show', person %></td>
     <td><%= link_to 'Edit', edit_person_path(person) %></td>
